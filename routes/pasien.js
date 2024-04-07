@@ -2,42 +2,42 @@ const express = require('express');
 const router = express.Router();
 const pasien = require('../services/pasien');
 
-/* GET programming languages. */
+/* GET Pasien */
 router.get('/', async function (req, res, next) {
     try {
         res.json(await pasien.getMultiple(req.query.page));
     } catch (err) {
-        console.error(`Error while getting pasien `, err.message);
+        console.error(`Ambil data pasien erorr  `, err.message);
         next(err);
     }
 });
-/* PUT programming language */
+/* PUT Pasien */
 router.put('/:id', async function (req, res, next) {
     try {
         res.json(await pasien.update(req.params.id, req.body));
     } catch (err) {
-        console.error(`Error while updating pasien`, err.message);
+        console.error(`Ubah data pasien erorr`, err.message);
         next(err);
     }
 });
 
 
-/* POST programming language */
+/* POST Pasien */
 router.post('/', async function (req, res, next) {
     try {
         res.json(await pasien.create(req.body));
     } catch (err) {
-        console.error(`Error while creating pasien`, err.message);
+        console.error(`Tambah data pasien erorr`, err.message);
         next(err);
     }
 });
 
-/* DELETE programming language */
+/* DELETE Pasien */
 router.delete('/:id', async function (req, res, next) {
     try {
         res.json(await pasien.remove(req.params.id));
     } catch (err) {
-        console.error(`Error while deleting pasien`, err.message);
+        console.error(`Hapus data pasien erorr`, err.message);
         next(err);
     }
 });
@@ -46,7 +46,7 @@ router.get('/:id', async function (req, res, next) {
     try {
         res.json(await pasien.search(req.params.id));
     } catch (err) {
-        console.error(`Error while pasien `, err.message);
+        console.error(`Cari data pasien erorr `, err.message);
         next(err);
     }
 });

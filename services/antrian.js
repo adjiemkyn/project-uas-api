@@ -23,15 +23,15 @@ async function getMultiple(page = 1) {
 async function create(antrian) {
     const result = await db.query(
         `INSERT INTO data_antrian
-      (id_pasien, nomor_antrian, waktu_kedatangan, jenis_transaksi, keterangan) 
+      (id_pasien, nomor_antrian, jenis_transaksi, keterangan) 
       VALUES 
-      ('${antrian.id_pasien}, ${antrian.nomor_antrian}, ${antrian.waktu_kedatangan}, ${antrian.jenis_transaksi}, ${antrian.keterangan})`
+      (${antrian.id_pasien}, ${antrian.nomor_antrian}, '${antrian.jenis_transaksi}', '${antrian.keterangan}' )`
     );
 
-    let message = 'Error in creating programming language';
+    let message = 'Tambah data antrian gagal';
 
     if (result.affectedRows) {
-        message = 'Programming language created successfully';
+        message = 'Tambah data antrian berhasil';
     }
 
     return { message };
@@ -40,15 +40,15 @@ async function create(antrian) {
 async function update(id, antrian) {
     const result = await db.query(
         `UPDATE data_antrian 
-      SET nama="${antrian.nama}", released_year=${antrian.released_year}, githut_rank=${antrian.githut_rank}, 
-      pypl_rank=${antrian.pypl_rank}, tiobe_rank=${antrian.tiobe_rank} 
+      SET id_pasien="${antrian.id_pasien}", nomor_antrian=${antrian.nomor_antrian}, jenis_transaksi="${antrian.jenis_transaksi}", 
+      keterangan="${antrian.keterangan}"
       WHERE id=${id}`
     );
 
-    let message = 'Error in updating programming language';
+    let message = 'Ubah data antrian gagal';
 
     if (result.affectedRows) {
-        message = 'Programming language updated successfully';
+        message = 'Ubah data antrian Berhasil';
     }
 
     return { message };
@@ -56,13 +56,13 @@ async function update(id, antrian) {
 
 async function remove(id) {
     const result = await db.query(
-        `DELETE FROM programming_languages WHERE id=${id}`
+        `DELETE FROM data_antrian WHERE id=${id}`
     );
 
-    let message = 'Error in deleting programming language';
+    let message = 'Hapus data antrian gagal';
 
     if (result.affectedRows) {
-        message = 'Programming language deleted successfully';
+        message = 'Hapus data antrian berhasil';
     }
 
     return { message };
