@@ -20,12 +20,12 @@ async function getMultiple(page = 1) {
 
 
 
-async function create(programmingLanguage) {
+async function create(antrian) {
     const result = await db.query(
-        `INSERT INTO programming_languages 
-      (name, released_year, githut_rank, pypl_rank, tiobe_rank) 
+        `INSERT INTO data_antrian
+      (id_pasien, nomor_antrian, waktu_kedatangan, jenis_transaksi, keterangan) 
       VALUES 
-      ('${programmingLanguage.name}', ${programmingLanguage.released_year}, ${programmingLanguage.githut_rank}, ${programmingLanguage.pypl_rank}, ${programmingLanguage.tiobe_rank})`
+      ('${antrian.id_pasien}, ${antrian.nomor_antrian}, ${antrian.waktu_kedatangan}, ${antrian.jenis_transaksi}, ${antrian.keterangan})`
     );
 
     let message = 'Error in creating programming language';
@@ -37,11 +37,11 @@ async function create(programmingLanguage) {
     return { message };
 }
 
-async function update(id, programmingLanguage) {
+async function update(id, antrian) {
     const result = await db.query(
-        `UPDATE programming_languages 
-      SET name="${programmingLanguage.name}", released_year=${programmingLanguage.released_year}, githut_rank=${programmingLanguage.githut_rank}, 
-      pypl_rank=${programmingLanguage.pypl_rank}, tiobe_rank=${programmingLanguage.tiobe_rank} 
+        `UPDATE data_antrian 
+      SET nama="${antrian.nama}", released_year=${antrian.released_year}, githut_rank=${antrian.githut_rank}, 
+      pypl_rank=${antrian.pypl_rank}, tiobe_rank=${antrian.tiobe_rank} 
       WHERE id=${id}`
     );
 

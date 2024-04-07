@@ -4,7 +4,7 @@ const config = require('../config');
 
 async function getMultiple(page = 1) {
     const offset = helper.getOffset(page, config.listPerPage);
-    const rows = await db.query(
+    const rows = await db.querya(
         `SELECT id, nama, usia, alamat, tgl_lahir, no_tlp 
     FROM data_pasien LIMIT ${offset},${config.listPerPage}`
     );
@@ -20,56 +20,56 @@ async function getMultiple(page = 1) {
 
 
 
-async function create(programmingLanguage) {
-    const result = await db.query(
-        `INSERT INTO programming_languages 
-      (name, released_year, githut_rank, pypl_rank, tiobe_rank) 
+async function create(pasien) {
+    const resulta = await db.querya(
+        `INSERT INTO data_pasien
+      (nama, usia, alamat, tgl_lahir, no_tlp) 
       VALUES 
-      ('${programmingLanguage.name}', ${programmingLanguage.released_year}, ${programmingLanguage.githut_rank}, ${programmingLanguage.pypl_rank}, ${programmingLanguage.tiobe_rank})`
+      ('${pasien.nama}', ${pasien.usia},  '${pasien.alamat}', ${pasien.tgl_lahir}, ${pasien.no_tlp} )`
     );
 
-    let message = 'Error in creating programming language';
+    let message = 'Tambah data Pasien gagal';
 
-    if (result.affectedRows) {
-        message = 'Programming language created successfully';
+    if (resulta.affectedRows) {
+        message = 'Tambah data pasien berhasil';
     }
 
     return { message };
 }
 
-async function update(id, programmingLanguage) {
-    const result = await db.query(
-        `UPDATE programming_languages 
-      SET name="${programmingLanguage.name}", released_year=${programmingLanguage.released_year}, githut_rank=${programmingLanguage.githut_rank}, 
-      pypl_rank=${programmingLanguage.pypl_rank}, tiobe_rank=${programmingLanguage.tiobe_rank} 
+async function update(id, pasien) {
+    const resulta = await db.query(
+        `UPDATE data_pasien 
+      SET nama="${pasien.nama}", usia=${pasien.usia}, alamat="${pasien.alamat}", 
+     tgl_lahir=${pasien.tgl_lahir}, no_tlp=${pasien.no_tlp} 
       WHERE id=${id}`
     );
 
-    let message = 'Error in updating programming language';
+    let message = 'Ubah data Pasien gagal';
 
-    if (result.affectedRows) {
-        message = 'Programming language updated successfully';
+    if (resulta.affectedRows) {
+        message = 'Ubah data pasien berhasil';
     }
 
     return { message };
 }
 
 async function remove(id) {
-    const result = await db.query(
-        `DELETE FROM programming_languages WHERE id=${id}`
+    const resulta = await db.query(
+        `DELETE FROM data_pasien WHERE id=${id}`
     );
 
-    let message = 'Error in deleting programming language';
+    let message = 'Hapus data Pasien gagal';
 
-    if (result.affectedRows) {
-        message = 'Programming language deleted successfully';
+    if (resulta.affectedRows) {
+        message = 'Hapus data pasien berhasil';
     }
 
     return { message };
 }
 
 async function search(id) {
-    const rows = await db.callSpSearch(id);
+    const rows = await db.callSpSearcha(id);
     const data = helper.emptyOrRows(rows);
     return {
         data
