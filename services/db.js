@@ -14,7 +14,23 @@ async function callSpSearch(id) {
 
     return results;
 }
+
+async function querya(sql, params) {
+    const connection = await mysql.createConnection(config.db);
+    const [results,] = await connection.execute(sql, params);
+
+    return results;
+}
+
+async function callSpSearcha(id) {
+    const connection = await mysql.createConnection(config.db);
+    const [results,] = await connection.query('CALL sp_search_data_pasien_by_id(' + id + ')');
+
+    return results;
+}
 module.exports = {
     query,
-    callSpSearch
+    callSpSearch,
+    querya,
+    callSpSearcha
 }

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const antrianRouter = require("./routes/antrian");
+const pasienRouter = require("./routes/pasien");
 app.use(express.json());
 app.use(
     express.urlencoded({
@@ -12,6 +13,14 @@ app.get("/", (req, res) => {
     res.json({ message: "ok" });
 });
 app.use("/antrian", antrianRouter);
+/* Error handler middleware */
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    console.error(err.message, err.stack);
+    res.status(statusCode).json({ message: err.message });
+    return;
+});
+app.use("/pasien", pasienRouter);
 /* Error handler middleware */
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
