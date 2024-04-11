@@ -69,7 +69,7 @@ async function remove(id) {
 }
 
 async function search(id) {
-    const rows = await db.callSpSearcha(id);
+    const rows = await db.callSpSearch(id);
     const data = helper.emptyOrRows(rows);
     return {
         data

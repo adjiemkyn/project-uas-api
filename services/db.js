@@ -15,22 +15,22 @@ async function callSpSearch(id) {
     return results;
 }
 
-async function querya(sql, params) {
-    const connection = await mysql.createConnection(config.db);
-    const [results,] = await connection.execute(sql, params);
+// async function querya(sql, params) {
+//     const connection = await mysql.createConnection(config.db);
+//     const [resultsa,] = await connection.execute(sql, params);
 
-    return results;
-}
+//     return resultsa;
+// }
 
-async function callSpSearcha(id) {
-    const connection = await mysql.createConnection(config.db);
-    const [results,] = await connection.query('CALL sp_search_data_pasien_by_id(' + id + ')');
+// async function callSpSearcha(id) {
+//     const connection = await mysql.createConnection(config.db);
+//     const [resultsa,] = await connection.query('CALL sp_search_data_pasien_by_id(' + id + ')');
 
-    return results;
-}
+//     return resultsa;
+// }
 module.exports = {
     query,
     callSpSearch,
-    querya,
-    callSpSearcha
+    // querya,
+    // callSpSearcha
 }
